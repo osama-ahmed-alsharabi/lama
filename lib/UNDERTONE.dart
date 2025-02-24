@@ -58,7 +58,6 @@ class _UNDERTONEState extends State<UNDERTONE> {
 
   @override
   Widget build(BuildContext context) {
-    UndertoneModel? undertoneModell =
         BlocProvider.of<FetchUndertoneCubit>(context).fetch();
     return Scaffold(
       extendBodyBehindAppBar: true,

@@ -1,8 +1,12 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:p13/UNDERTONE.dart';
+import 'package:http/http.dart' as http;
+import "package:http_parser/src/media_type.dart";
 import 'package:p13/cubit/cubit/fetch_undertone_cubit.dart';
 import 'package:p13/cubit/undertone_cubit.dart';
 import 'package:p13/model/undertone_model.dart';
@@ -122,7 +126,10 @@ class _SelfieState extends State<Selfie> {
     }
     BlocProvider.of<UndertoneCubit>(context).fun(UndertoneModel(
         season: BlocProvider.of<UndertoneCubit>(context).getRandomSeason()));
+    // BlocProvider.of(context).
+
     BlocProvider.of<FetchUndertoneCubit>(context).fetch();
+
     // UNDERTONE(undertoneModel: undertoneModel ,);
     // undertoneModel = ;
     Navigator.pop(context);
