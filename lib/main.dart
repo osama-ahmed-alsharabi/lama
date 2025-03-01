@@ -233,7 +233,7 @@ class _TestColorNewState extends State<TestColorNew> {
 
   Future<void> _pickAndAnalyzeImage(ImageSource source) async {
     // setState(() => _isLoading = true);
-
+    final Uint8List bytes;
     try {
       final XFile? image = await ImagePicker().pickImage(
         source: source,
@@ -241,7 +241,7 @@ class _TestColorNewState extends State<TestColorNew> {
       );
 
       if (image != null) {
-        final bytes = await image.readAsBytes();
+        bytes = await image.readAsBytes();
         // setState(() => _imageBytes = bytes);
 
         final uri = Uri.parse('http://127.0.0.1:5000/analyze');
@@ -258,15 +258,20 @@ class _TestColorNewState extends State<TestColorNew> {
 
         if (response.statusCode == 200) {
           final data = json.decode(responseBody);
+          log(data['season']);
           // setState(() {
 
           // BlocProvider.of<UndertoneCubit>(context)
           //     .fun(UndertoneModel(season: data['season']));
-
+          String? newSeason =
+              BlocProvider.of<FetchUndertoneCubit>(context).value?.season;
           BlocProvider.of<FetchUndertoneCubit>(context).fetch();
           if (BlocProvider.of<FetchUndertoneCubit>(context).value?.season ==
-              data["season"]) {
+              data["season"].toString().toLowerCase()) {
+            BlocProvider.of<FetchUndertoneCubit>(context).value?.delete();
             _showAlertDialog2(context);
+            BlocProvider.of<UndertoneCubit>(context)
+                .fun(UndertoneModel(season: newSeason!, image: bytes));
           } else {
             _showAlertDialog3(context);
           }

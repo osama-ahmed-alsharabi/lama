@@ -18,15 +18,18 @@ class UndertoneModelAdapter extends TypeAdapter<UndertoneModel> {
     };
     return UndertoneModel(
       season: fields[0] as String,
+      image: fields[1] as Uint8List?,
     );
   }
 
   @override
   void write(BinaryWriter writer, UndertoneModel obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.season);
+      ..write(obj.season)
+      ..writeByte(1)
+      ..write(obj.image);
   }
 
   @override
