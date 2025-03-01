@@ -76,35 +76,42 @@ class MyWardrobePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: state is FetchUndertonehasData ?  Center(
-                      child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.memory(
-                          height: MediaQuery.sizeOf(context).height * 0.4,
-                          BlocProvider.of<FetchUndertoneCubit>(context).value!.image!),
-                      const Text(
-                        'Your Wardrobe',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                  child: state is FetchUndertonehasData &&
+                          BlocProvider.of<FetchUndertoneCubit>(context)
+                                  .value
+                                  ?.image !=
+                              null
+                      ? Center(
+                          child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.memory(
+                                height: MediaQuery.sizeOf(context).height * 0.4,
+                                BlocProvider.of<FetchUndertoneCubit>(context)
+                                    .value!
+                                    .image!),
+                            const Text(
+                              'Your Wardrobe',
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ))
+                      : const Center(
+                          child: Text(
+                            'There Is No Wardrobe Store Yet..',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  )):
-                   Center(
-                    child: Text(
-                      'There Is No Wardrobe Store Yet..',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
                 ),
               ),
             ],

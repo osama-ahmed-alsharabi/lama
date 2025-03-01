@@ -272,6 +272,7 @@ class _TestColorNewState extends State<TestColorNew> {
             _showAlertDialog2(context);
             BlocProvider.of<UndertoneCubit>(context)
                 .fun(UndertoneModel(season: newSeason!, image: bytes));
+            BlocProvider.of<FetchUndertoneCubit>(context).fetch();
           } else {
             _showAlertDialog3(context);
           }

@@ -16,7 +16,7 @@ class UndertoneCubit extends Cubit<UndertoneState> {
 
     // Generate a random index
     Random random = Random();
-    int index = random.nextInt(seasons.length);
+    int index = 3;
 
     // Return the season at the random index
     return seasons[index];

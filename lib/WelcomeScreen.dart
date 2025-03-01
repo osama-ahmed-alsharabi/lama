@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:p13/cubit/cubit/fetch_undertone_cubit.dart';
 import 'package:p13/requires.dart';
 
 
@@ -11,7 +13,12 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   bool isChecked = false; // متغير لتتبع حالة الموافقة
-
+ 
+ @override
+  void initState() {
+    BlocProvider.of<FetchUndertoneCubit>(context).fetch();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
